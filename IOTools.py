@@ -33,6 +33,7 @@ def dict2json(a_dict, json_file, file_perms='w'):
 def csv2list_array(csv_file, delimiter=','):
     def _read_csv(target, delim=delimiter):
         reader = csv.reader(target, delimiter=delim)
+
         return [row for row in reader]
 
     return file_io(csv_file, 'r', _read_csv)
@@ -43,6 +44,24 @@ def list_array2csv(list_array, csv_file, file_perms='w', delimiter=','):
         writer = csv.writer(target, delimiter=delim)
         for row in list_array:
             writer.writerow(row)
+
+    return file_io(csv_file, file_perms, _write_csv)
+
+
+def csv2dicts(csv_file, delimiter=','):
+    _read_csv = lambda target: [row for row in csv.DictReader(target, delimiter=delimiter)]
+    
+    return file_io(csv_file, 'r', _read_csv)
+
+
+def dicts2csv(a_dict, csv_file, file_perms='w', headers=None, delimiter=','):
+    def _write_csv(target, head=headers, a_dict=a_dict, delim=delimiter):
+        if not head:
+            head = a_dict.keys()
+
+        writer = csv.DictWriter(target, fieldnames=head, delimiter=delim)
+        writer.writeheader()
+        writer.writerows(a_dict)
 
     return file_io(csv_file, file_perms, _write_csv)
 
