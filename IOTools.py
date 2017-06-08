@@ -50,20 +50,24 @@ def list_array2csv(list_array, csv_file, file_perms='w', delimiter=','):
 
 def csv2dicts(csv_file, delimiter=','):
     _read_csv = lambda target: [row for row in csv.DictReader(target, delimiter=delimiter)]
-    
+
     return file_io(csv_file, 'r', _read_csv)
 
 
-def dicts2csv(a_dict, csv_file, file_perms='w', headers=None, delimiter=','):
-    def _write_csv(target, head=headers, a_dict=a_dict, delim=delimiter):
+# If headers is left unspecified, the first dicts key will be used as the fieldnames
+def dicts2csv(list_of_dicts, csv_file, file_perms='w', headers=None, delimiter=',', write_headers = False):
+    def _write_csv(target, head=headers, dict_list=a_list_of_dicts, delim=delimiter, w_headers=write_headers):
         if not head:
-            head = a_dict.keys()
+            head = dict_list[0].keys()
 
         writer = csv.DictWriter(target, fieldnames=head, delimiter=delim)
-        writer.writeheader()
-        writer.writerows(a_dict)
+        if w_headers:
+            writer.writeheader()
+
+        writer.writerows(dict_list)
 
     return file_io(csv_file, file_perms, _write_csv)
+
 
 if __name__  == "__main__":
     a_dict = {1: 2, "a": True, "Foo": [1,"bar"]}
@@ -88,3 +92,16 @@ if __name__  == "__main__":
 
     print("Reading csv back into list")
     print("Success" if csv2list_array(a_file, delimiter=',') else "Failure")
+
+    a_list_of_dicts = [
+        {"first_name": "Bob", "last_name": "Bobbert", "age": 20},
+        {"first_name": "Steve", "last_name": "Stevenson", "age": -1},
+        {"first_name": "Alice", "last_name": "Alison", "age": 300},
+    ]
+    a_nother_file = 'test2.csv'
+
+    print("Sending {dict_list} to {file}".format(dict_list=a_list_of_dicts, file=a_nother_file))
+    print("Success" if dicts2csv(a_list_of_dicts, a_nother_file, write_headers=True) else "Failure")
+
+    print("Reading csv back into list of dicts")
+    print("Success" if csv2dicts(a_nother_file) else "Failure")
