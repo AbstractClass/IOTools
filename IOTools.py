@@ -1,13 +1,17 @@
 __author__ = "Connor MacLeod"
 __github__ = "https://github.com/AbstractClass/IOTools"
-__version__ = "0.1"
+__version__ = "0.2"
 
 
 import json
 import csv
 
 
-def file_io(file, permissions, io_function):
+"""Factory function
+    Generic file opener, executes a given function against the file object
+    It's goal is to remove the try/except and 'with open()' boilerplate
+"""
+def file_io(file, permissions, io_function, print_err=True):
     try:
         with open(file, permissions) as target:
             result = io_function(target)
@@ -15,11 +19,16 @@ def file_io(file, permissions, io_function):
             return result if result else 1
 
     except Exception as e:
-        print("I/O Error: ", e)
+        if print_err:
+            print("I/O Error: ", e)
 
         return 0
 
 
+"""
+    All of the below functions are simple applications of the above factory.
+    I chose these conversions because they are the easiest and IMO the most common.
+"""
 def json2dict(json_file):
     return file_io(json_file, 'r', json.load)
 
@@ -56,7 +65,7 @@ def csv2dicts(csv_file, delimiter=','):
 
 # If headers is left unspecified, the first dicts key will be used as the fieldnames
 def dicts2csv(list_of_dicts, csv_file, file_perms='w', headers=None, delimiter=',', write_headers = False):
-    def _write_csv(target, head=headers, dict_list=a_list_of_dicts, delim=delimiter, w_headers=write_headers):
+    def _write_csv(target, head=headers, dict_list=list_of_dicts, delim=delimiter, w_headers=write_headers):
         if not head:
             head = dict_list[0].keys()
 
@@ -94,7 +103,7 @@ if __name__  == "__main__":
     print("Success" if csv2list_array(a_file, delimiter=',') else "Failure")
 
     a_list_of_dicts = [
-        {"first_name": "Bob", "last_name": "Bobbert", "age": 20},
+        {"first_name": "Robberto (the 3rd)", "last_name": "Bobbert", "age": 20},
         {"first_name": "Steve", "last_name": "Stevenson", "age": -1},
         {"first_name": "Alice", "last_name": "Alison", "age": 300},
     ]
