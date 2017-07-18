@@ -1,9 +1,0 @@
-MANIFEST.in
-setup.cfg
-setup.py
-iotools/__init__.py
-iotools/iotools.py
-iotools.egg-info/PKG-INFO
-iotools.egg-info/SOURCES.txt
-iotools.egg-info/dependency_links.txt
-iotools.egg-info/top_level.txt
