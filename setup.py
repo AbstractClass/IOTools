@@ -8,7 +8,7 @@ def read(fname):
 setup(
     name='iotools',
     packages=['iotools'],
-    version='0.4',
+    version='0.4.2',
     description='A wrapper for simple file IO to eliminate boilerplate.',
     author='Connor MacLeod',
     author_email='connor.macleod96@hotmail.ca',
