@@ -1,0 +1,13 @@
+Metadata-Version: 1.1
+Name: iotools
+Version: 0.4
+Summary: A wrapper for simple file IO to eliminate boilerplate.
+Home-page: https://github.com/AbstractClass/IOTools/
+Author: Connor MacLeod
+Author-email: connor.macleod96@hotmail.ca
+License: UNKNOWN
+Download-URL: https://github.com/AbstractClass/IOTools/archive/0.4.tar.gz
+Description: UNKNOWN
+Keywords: file,IO,csv,json
+Platform: UNKNOWN
+Classifier: 3

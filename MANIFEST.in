@@ -1,0 +1,5 @@
+# Testfiles
+include test/test*
+
+# Misc
+include LICENSE.txt

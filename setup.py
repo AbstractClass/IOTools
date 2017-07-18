@@ -1,5 +1,9 @@
-from distutils.core import setup
+import os
+from setuptools import setup
 
+
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
     name='iotools',
@@ -11,5 +15,5 @@ setup(
     url='https://github.com/AbstractClass/IOTools/',
     download_url='https://github.com/AbstractClass/IOTools/archive/0.4.tar.gz',
     keywords=['file', 'IO', 'csv', 'json'],
-    classifiers=[]
+    classifiers=[3]
 )
