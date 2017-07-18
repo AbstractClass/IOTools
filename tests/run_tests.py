@@ -1,4 +1,4 @@
-from package.iotools import *
+from iotools.iotools import *
 
 a_dict = {1: 2, "a": True, "Foo": [1, "bar"]}
 a_file = 'test.json'
