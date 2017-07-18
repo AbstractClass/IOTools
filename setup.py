@@ -15,5 +15,9 @@ setup(
     url='https://github.com/AbstractClass/IOTools/',
     download_url='https://github.com/AbstractClass/IOTools/archive/0.4.tar.gz',
     keywords=['file', 'IO', 'csv', 'json'],
-    classifiers=[3]
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3.5'
+    ]
 )
